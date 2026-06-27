@@ -10,7 +10,6 @@ proses fermentasi/pengembangan adonan.
 
 from base_product import BaseProduct, ProductionInterface, FermentationInterface
 
-
 class RotiManis(BaseProduct, ProductionInterface, FermentationInterface):
     def __init__(self, jumlah_pcs=0):
         bahan_baku = {
