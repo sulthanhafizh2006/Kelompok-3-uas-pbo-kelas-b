@@ -266,6 +266,6 @@ Setiap produk menyimpan data bahan baku, biaya, dan harga jual di dalam kelasnya
 
 *Dibuat dengan 🍞 untuk Tugas Proyek PBO*
 
-**Kelompok 3 · Kelas B · 2025**
+**Kelompok 3 · Kelas B · 2026**
 
 </div>
