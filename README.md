@@ -12,13 +12,13 @@
 
 **Sistem Informasi Produksi & Manajemen Produk Bakery**
 
-*Proyek Akhir Mata Kuliah Pemrograman Berorientasi Objek*
+*Proyek Ujian Akhir Semester Mata Kuliah Pemrograman Berorientasi Objek*
 
 ---
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![OOP](https://img.shields.io/badge/Paradigma-OOP-F7B731?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Active-2ECC71?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Selesai-2ECC71?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Academic-9B59B6?style=for-the-badge)
 
 </div>
@@ -30,21 +30,21 @@
 **Hanari Bakery System** adalah aplikasi manajemen produksi berbasis Python yang dirancang untuk membantu toko roti **Hanari Bakery** mengelola produk, bahan baku, estimasi profit, dan simulasi proses produksi secara digital.
 
 Proyek ini dikembangkan menggunakan konsep **Object-Oriented Programming (OOP)** dengan menerapkan:
-- 🔷 **Abstraction** — Kelas induk abstrak untuk standarisasi produk
-- 🔶 **Inheritance** — Setiap produk mewarisi properti dari base class
-- 🔹 **Interface** — Standarisasi proses `baking`, `packaging`, dan `labeling`
-- 🔸 **Encapsulation** — Data produk terlindungi dalam masing-masing kelas
+- 🔷 **Abstraction** — Kelas induk abstrak (`BaseProduct`) untuk standarisasi produk
+- 🔶 **Inheritance** — Setiap produk mewarisi properti dan method dari `BaseProduct`
+- 🔹 **Interface** — Standarisasi proses melalui `ProductionInterface`, `FermentationInterface`, dan `ToppingInterface`
+- 🔸 **Encapsulation** — Data produk terlindungi dan diakses melalui method masing-masing kelas
 
 ---
 
 ## 🍞 Produk yang Dikelola
 
-| Produk | Kode | Proses Khusus |
-|--------|------|---------------|
-| 🍞 Roti Manis | `RM-001` | Pengadonan → Pengembangan → Pemanggangan |
-| 🥐 Croissant | `CR-001` | Pengadonan → Pengembangan (laminasi) → Pemanggangan |
-| 🍪 Butter Cookies | `BC-001` | Pengadonan → Topping → Pemanggangan |
-| 🧁 Muffin | `MF-001` | Pengadonan → Pengembangan → Topping → Pemanggangan |
+| Produk | Kode | Proses Produksi |
+|--------|------|------------------|
+| 🍞 Roti Manis | `RT001` | Pengadonan → Pengembangan → Pemanggangan |
+| 🥐 Croissant | `RT002` | Pengadonan → Pengembangan (laminasi) → Pemanggangan |
+| 🍪 Butter Cookies | `RT003` | Pengadonan → Topping → Pemanggangan |
+| 🧁 Muffin | `RT004` | Pengadonan → Pengembangan → Topping → Pemanggangan |
 
 ---
 
@@ -58,13 +58,13 @@ Proyek ini dikembangkan menggunakan konsep **Object-Oriented Programming (OOP)**
 │  2.  Tampilkan Semua Produk                 │
 │  3.  Kalkulator Estimasi Profit             │
 │  4.  Simulasi Proses Produksi               │
-│  0.  Keluar                                 │
+│  5.  Keluar                                 │
 └─────────────────────────────────────────────┘
 ```
 
 - **📦 Manajemen Produk** — Tambah dan tampilkan produk beserta detail bahan baku
 - **💰 Kalkulator Profit** — Estimasi keuntungan berdasarkan jumlah pcs yang diproduksi
-- **⚙️ Simulasi Produksi** — Jalankan tahapan produksi secara berurutan per produk
+- **⚙️ Simulasi Produksi** — Jalankan tahapan produksi secara berurutan sesuai jenis roti
 
 ---
 
@@ -73,27 +73,18 @@ Proyek ini dikembangkan menggunakan konsep **Object-Oriented Programming (OOP)**
 ```
 HanariBakery/
 │
-├── 📄 main.py                          # Entry point & menu utama
+├── 📄 main.py                  # Entry point, menu utama & logika program
 │
-├── 📁 interfaces/
-│   └── production_interface.py         # Abstract interface (baking, packaging, labeling)
+├── 🏗️ base_product.py          # Abstract base class + ProductionInterface,
+│                                #   FermentationInterface, ToppingInterface
 │
-├── 📁 models/
-│   ├── base_product.py                 # Abstract base class semua produk
-│   ├── roti_manis.py                   # Kelas Roti Manis
-│   ├── croissant.py                    # Kelas Croissant
-│   ├── butter_cookies.py               # Kelas Butter Cookies
-│   └── muffin.py                       # Kelas Muffin
+├── 🍞 roti_manis.py            # Kelas RotiManis
+├── 🥐 croissant.py             # Kelas Croissant
+├── 🍪 butter_cookies.py        # Kelas ButterCookies
+├── 🧁 muffin.py                # Kelas Muffin
 │
-├── 📁 services/
-│   ├── product_manager.py              # Manajemen & penyimpanan produk
-│   └── profit_calculator.py            # Logika kalkulasi profit
-│
-├── 📁 utils/
-│   └── display.py                      # Helper tampilan menu CLI
-│
-├── 📁 docs/
-│   └── class_diagram.png               # Diagram UML (Draw.io)
+├── 📁 assets/
+│   └── class_diagram.png       # Diagram UML (Draw.io)
 │
 └── 📄 README.md
 ```
@@ -122,8 +113,9 @@ HanariBakery/
       │ # jumlah_pcs     │
       │ ─────────────── │
       │ + tampilkan_info()│
-      │ + packaging()    │
-      │ + labeling()     │
+      │ + hitung_profit() │
+      │ + pengadonan()*   │
+      │ + pemanggangan()* │
       └──┬──────┬──┬──┬──┘
          │      │  │  │
     ┌────▼─┐ ┌──▼─┐ ┌▼──────────┐ ┌──▼───┐
@@ -131,6 +123,10 @@ HanariBakery/
     │Manis │ │ssnt│ │  Cookies  │ │      │
     └──────┘ └────┘ └───────────┘ └──────┘
 ```
+
+<div align="center">
+<img src="assets/class_diagram.png" alt="Diagram Class Hanari Bakery" width="800"/>
+</div>
 
 ---
 
@@ -144,10 +140,10 @@ HanariBakery/
 
 ```bash
 # 1. Clone repository ini
-git clone https://github.com/username/HanariBakery.git
+git clone https://github.com/sulthanhafizh2006/Kelompok-3-uas-pbo-kelas-b.git
 
 # 2. Masuk ke direktori proyek
-cd HanariBakery
+cd Kelompok-3-uas-pbo-kelas-b
 
 # 3. Jalankan program
 python main.py
@@ -157,16 +153,16 @@ python main.py
 
 ```
 == Kalkulator Estimasi Profit ==
-Produk          : Croissant
-Jumlah Produksi : 30 pcs
-Total Biaya     : Rp 125.000
-Total Pendapatan: Rp 225.000
-Estimasi Profit : Rp 100.000
+Produk          : Muffin
+Jumlah Produksi : 15 pcs
+Biaya Produksi  : Rp 2.500 / pcs
+Harga Jual      : Rp 5.500 / pcs
+Estimasi Profit : Rp 45.000
 ```
 
 ---
 
-## 👥 Tim Pengembang
+## 👥 Tim Pengembang — Kelompok 3
 
 <div align="center">
 
@@ -176,45 +172,45 @@ Estimasi Profit : Rp 100.000
       <img src="https://img.shields.io/badge/01-Anggota-F7B731?style=for-the-badge" /><br><br>
       <b>🧑‍💻 Sulthan Hafizh Putra Agung</b><br>
       <sub>NIM: K3525013</sub><br><br>
-      <img src="https://img.shields.io/badge/File-main.py-3776AB?style=flat-square&logo=python" /><br>
+      <img src="https://img.shields.io/badge/File-README.md%20%26%20main.py-3776AB?style=flat-square&logo=python" /><br>
       <sub>Menu utama, routing antar fitur, dan entry point program</sub>
     </td>
     <td align="center" width="300">
       <img src="https://img.shields.io/badge/02-Anggota-E74C3C?style=for-the-badge" /><br><br>
-      <b>🧑‍💻 [Nama Anggota 2]</b><br>
-      <sub>NIM: [XXXXXXXXXX]</sub><br><br>
-      <img src="https://img.shields.io/badge/File-interfaces%20%26%20base__product-E74C3C?style=flat-square" /><br>
-      <sub>Abstract interface & base class sebagai fondasi arsitektur OOP</sub>
+      <b>🧑‍💻 Zahra Faizza Kuncoroningrum</b><br>
+      <sub>NIM: K3525017</sub><br><br>
+      <img src="https://img.shields.io/badge/File-base__product.py-E74C3C?style=flat-square" /><br>
+      <sub>Abstract base class & seluruh interface sebagai fondasi arsitektur OOP</sub>
     </td>
     <td align="center" width="300">
       <img src="https://img.shields.io/badge/03-Anggota-2ECC71?style=for-the-badge" /><br><br>
-      <b>🧑‍💻 [Nama Anggota 3]</b><br>
-      <sub>NIM: [XXXXXXXXXX]</sub><br><br>
-      <img src="https://img.shields.io/badge/File-roti__manis%20%26%20croissant-2ECC71?style=flat-square" /><br>
-      <sub>Implementasi produk Roti Manis dan Croissant beserta proses produksinya</sub>
+      <b>🧑‍💻 Aksya Nayla Fitriana</b><br>
+      <sub>NIM: K3525047</sub><br><br>
+      <img src="https://img.shields.io/badge/File-roti__manis.py-2ECC71?style=flat-square" /><br>
+      <sub>Implementasi produk Roti Manis beserta proses produksinya</sub>
     </td>
   </tr>
   <tr>
     <td align="center" width="300">
       <img src="https://img.shields.io/badge/04-Anggota-9B59B6?style=for-the-badge" /><br><br>
-      <b>🧑‍💻 [Nama Anggota 4]</b><br>
-      <sub>NIM: [XXXXXXXXXX]</sub><br><br>
-      <img src="https://img.shields.io/badge/File-butter__cookies%20%26%20muffin-9B59B6?style=flat-square" /><br>
-      <sub>Implementasi produk Butter Cookies dan Muffin beserta proses produksinya</sub>
+      <b>🧑‍💻 Adibah Ruhil</b><br>
+      <sub>NIM: K3525044</sub><br><br>
+      <img src="https://img.shields.io/badge/File-croissant.py-9B59B6?style=flat-square" /><br>
+      <sub>Implementasi produk Croissant beserta proses produksinya</sub>
     </td>
     <td align="center" width="300">
       <img src="https://img.shields.io/badge/05-Anggota-1ABC9C?style=for-the-badge" /><br><br>
-      <b>🧑‍💻 [Nama Anggota 5]</b><br>
-      <sub>NIM: [XXXXXXXXXX]</sub><br><br>
-      <img src="https://img.shields.io/badge/File-services%2F-1ABC9C?style=flat-square" /><br>
-      <sub>Logika bisnis: manajemen produk & kalkulator estimasi profit</sub>
+      <b>🧑‍💻 Allicya Nailah Fairuza</b><br>
+      <sub>NIM: K3525048</sub><br><br>
+      <img src="https://img.shields.io/badge/File-butter__cookies.py-1ABC9C?style=flat-square" /><br>
+      <sub>Implementasi produk Butter Cookies beserta proses produksinya</sub>
     </td>
     <td align="center" width="300">
       <img src="https://img.shields.io/badge/06-Anggota-E67E22?style=for-the-badge" /><br><br>
-      <b>🧑‍💻 [Nama Anggota 6]</b><br>
-      <sub>NIM: [XXXXXXXXXX]</sub><br><br>
-      <img src="https://img.shields.io/badge/File-utils%20%26%20docs-E67E22?style=flat-square" /><br>
-      <sub>Display helper CLI, README.md, dan diagram UML Draw.io</sub>
+      <b>🧑‍💻 Faris Rafiuddin Hannan</b><br>
+      <sub>NIM: K3525058</sub><br><br>
+      <img src="https://img.shields.io/badge/File-muffin.py-E67E22?style=flat-square" /><br>
+      <sub>Implementasi produk Muffin beserta proses produksinya</sub>
     </td>
   </tr>
 </table>
@@ -235,21 +231,25 @@ Estimasi Profit : Rp 100.000
 <details>
 <summary><b>🔶 Inheritance</b></summary>
 
-Semua produk (`RotiManis`, `Croissant`, `ButterCookies`, `Muffin`) mewarisi `BaseProduct`, sehingga tidak perlu mendefinisikan ulang atribut dan method yang sama. Kode menjadi DRY *(Don't Repeat Yourself)*.
+Semua produk (`RotiManis`, `Croissant`, `ButterCookies`, `Muffin`) mewarisi `BaseProduct`, sehingga tidak perlu mendefinisikan ulang atribut dan method yang sama (nama, kode, bahan baku, biaya, harga jual). Kode menjadi DRY *(Don't Repeat Yourself)*.
 
 </details>
 
 <details>
 <summary><b>🔹 Interface</b></summary>
 
-`ProductionInterface` mendefinisikan kontrak standar proses produksi: `baking()`, `packaging()`, dan `labeling()`. Semua produk wajib memenuhi kontrak ini.
+- `ProductionInterface` — kontrak wajib semua produk: `baking()`, `packaging()`, `labeling()`.
+- `FermentationInterface` — kontrak khusus produk yang mengembang: `pengembangan()` (Roti Manis, Croissant, Muffin).
+- `ToppingInterface` — kontrak khusus produk dengan topping: `topping()` (Butter Cookies, Muffin).
+
+Pemecahan interface ini menerapkan **ISP** *(Interface Segregation Principle)* agar setiap subclass hanya mengimplementasikan method yang relevan bagi dirinya.
 
 </details>
 
 <details>
 <summary><b>🔸 Encapsulation</b></summary>
 
-Setiap produk menyimpan data bahan baku, biaya, dan harga jual di dalam kelasnya sendiri. Akses dikelola melalui method `tampilkan_info()`, bukan akses langsung ke atribut.
+Setiap produk menyimpan data bahan baku, biaya, dan harga jual di dalam kelasnya sendiri. Akses dikelola melalui method `tampilkan_info()` dan `hitung_profit()`, bukan akses langsung ke atribut dari luar kelas.
 
 </details>
 
@@ -257,7 +257,7 @@ Setiap produk menyimpan data bahan baku, biaya, dan harga jual di dalam kelasnya
 
 ## 📋 Dokumentasi
 
-- 📐 **Class Diagram** — Lihat `docs/class_diagram.png` (dibuat dengan [Draw.io](https://draw.io))
+- 📐 **Class Diagram** — Lihat `assets/class_diagram.png` (dibuat dengan [Draw.io](https://draw.io))
 - 🖥️ **Screenshot Output** — Lihat folder `docs/screenshots/`
 
 ---
@@ -266,6 +266,6 @@ Setiap produk menyimpan data bahan baku, biaya, dan harga jual di dalam kelasnya
 
 *Dibuat dengan 🍞 untuk Tugas Proyek PBO*
 
-**Politeknik · Kelas B · 2024/2025**
+**Kelompok 3 · Kelas B · 2025**
 
 </div>
