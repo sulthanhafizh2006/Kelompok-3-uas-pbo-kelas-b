@@ -16,7 +16,6 @@ from base_product import (
     ToppingInterface,
 )
 
-
 class Muffin(BaseProduct, ProductionInterface, FermentationInterface, ToppingInterface):
     def __init__(self, jumlah_pcs=0):
         bahan_baku = {
@@ -33,8 +32,8 @@ class Muffin(BaseProduct, ProductionInterface, FermentationInterface, ToppingInt
             nama="Muffin",
             kode="RT004",
             bahan_baku=bahan_baku,
-            biaya_produksi=2500,   # Rp per pcs
-            harga_jual=5500,       # Rp per pcs
+            biaya_produksi=2500,   
+            harga_jual=5500,       
             jumlah_pcs=jumlah_pcs,
         )
 
