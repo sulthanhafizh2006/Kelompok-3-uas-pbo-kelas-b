@@ -16,10 +16,8 @@ from croissant import Croissant
 from butter_cookies import ButterCookies
 from muffin import Muffin
 
-# Daftar produk yang tersimpan selama program berjalan (in-memory list)
 daftar_produk = []
 
-# Mapping pilihan jenis roti -> class produk
 JENIS_PRODUK = {
     "1": ("Roti Manis", RotiManis),
     "2": ("Croissant", Croissant),
@@ -27,12 +25,10 @@ JENIS_PRODUK = {
     "4": ("Muffin", Muffin),
 }
 
-
 def tampilkan_menu_jenis():
     print("\nPilih jenis roti:")
     for kode, (nama, _) in JENIS_PRODUK.items():
         print(f"  {kode}. {nama}")
-
 
 def input_jumlah_pcs(prompt="Masukkan jumlah pcs: "):
     while True:
@@ -44,7 +40,6 @@ def input_jumlah_pcs(prompt="Masukkan jumlah pcs: "):
             return nilai
         except ValueError:
             print("Input tidak valid, masukkan angka.")
-
 
 def tambah_produk_baru():
     tampilkan_menu_jenis()
@@ -62,7 +57,6 @@ def tambah_produk_baru():
     print(f"\nProduk '{nama_jenis}' berhasil ditambahkan dengan jumlah produksi "
           f"{jumlah_pcs} pcs.")
 
-
 def tampilkan_semua_produk():
     if not daftar_produk:
         print("\nBelum ada produk yang ditambahkan.")
@@ -72,7 +66,6 @@ def tampilkan_semua_produk():
     for produk in daftar_produk:
         produk.tampilkan_info()
         print(f"Jumlah pcs diproduksi: {produk.jumlah_pcs}")
-
 
 def kalkulator_profit():
     if not daftar_produk:

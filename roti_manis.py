@@ -25,8 +25,8 @@ class RotiManis(BaseProduct, ProductionInterface, FermentationInterface):
             nama="Roti Manis",
             kode="RT001",
             bahan_baku=bahan_baku,
-            biaya_produksi=3000,   # Rp per pcs
-            harga_jual=6000,       # Rp per pcs
+            biaya_produksi=3000,   
+            harga_jual=6000,       
             jumlah_pcs=jumlah_pcs,
         )
 

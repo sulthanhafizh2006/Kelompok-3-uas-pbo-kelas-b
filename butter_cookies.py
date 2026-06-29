@@ -11,7 +11,6 @@ FermentationInterface.
 
 from base_product import BaseProduct, ProductionInterface, ToppingInterface
 
-
 class ButterCookies(BaseProduct, ProductionInterface, ToppingInterface):
     def __init__(self, jumlah_pcs=0):
         bahan_baku = {
