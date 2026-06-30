@@ -25,8 +25,8 @@ class ButterCookies(BaseProduct, ProductionInterface, ToppingInterface):
             nama="Butter Cookies",
             kode="RT003",
             bahan_baku=bahan_baku,
-            biaya_produksi=1500,   # Rp per pcs
-            harga_jual=3500,       # Rp per pcs
+            biaya_produksi=1500,   
+            harga_jual=3500,       
             jumlah_pcs=jumlah_pcs,
         )
 

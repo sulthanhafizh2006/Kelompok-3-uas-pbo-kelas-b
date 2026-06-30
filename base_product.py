@@ -18,11 +18,10 @@ class BaseProduct(ABC):
     def __init__(self, nama, kode, bahan_baku, biaya_produksi, harga_jual, jumlah_pcs=0):
         self.nama = nama
         self.kode = kode
-        self.bahan_baku = bahan_baku          # dict -> {nama_bahan: jumlah}
-        self.biaya_produksi = biaya_produksi  # float, biaya produksi per resep (per-n pcs)
-        self.harga_jual = harga_jual          # float, harga jual per resep (per-n pcs)
-        self.jumlah_pcs = jumlah_pcs          # int, jumlah pcs yang ingin diproduksi
-
+        self.bahan_baku = bahan_baku          
+        self.biaya_produksi = biaya_produksi  
+        self.harga_jual = harga_jual          
+        self.jumlah_pcs = jumlah_pcs          
     def tampilkan_info(self):
         """Menampilkan informasi detail spesifikasi produk."""
         print(f"\n=== {self.nama} ({self.kode}) ===")
