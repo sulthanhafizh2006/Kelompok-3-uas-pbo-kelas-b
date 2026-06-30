@@ -25,8 +25,8 @@ class Croissant(BaseProduct, ProductionInterface, FermentationInterface):
             nama="Croissant",
             kode="RT002",
             bahan_baku=bahan_baku,
-            biaya_produksi=4500,   # Rp per pcs
-            harga_jual=9000,       # Rp per pcs
+            biaya_produksi=4500,  
+            harga_jual=9000,       
             jumlah_pcs=jumlah_pcs,
         )
 
